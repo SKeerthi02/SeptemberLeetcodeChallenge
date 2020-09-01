@@ -1,0 +1,17 @@
+class Solution:
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        
+        maxClockTime = float("-inf")
+        if min(A) > 2:
+            return ""
+        for h1, h2, m1, m2 in itertools.permutations(A):
+            
+            hour = h1*10+h2
+            minute = m1*10+m2
+            if hour < 24 and minute < 60:
+                maxClockTime = max(maxClockTime, hour * 60 + minute)
+                # print(maxClockTime)
+        if maxClockTime < 0:
+            return ""
+        else:
+            return "{:02d}:{:02d}".format(maxClockTime//60, maxClockTime%60)
