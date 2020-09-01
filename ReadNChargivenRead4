@@ -1,0 +1,19 @@
+class Solution:
+    def read(self, buf, n):
+        """
+        :type buf: Destination buffer (List[str])
+        :type n: Number of characters to read (int)
+        :rtype: The number of actual characters read (int)
+        """
+        copiedChar = 0
+        readChar = 4 
+        temp = [' ']*4
+        
+        while copiedChar < n and readChar == 4:
+            readChar = read4(temp)
+            for i in range(readChar):
+                if copiedChar == n:
+                    return copiedChar
+                buf[copiedChar] = temp[i]
+                copiedChar += 1
+        return copiedChar
