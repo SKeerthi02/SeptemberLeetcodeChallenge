@@ -1,0 +1,27 @@
+class Solution:
+    def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:
+        
+        if k < 0 or t < 0:
+            return False
+        
+        if t == 0:
+            return len(set(nums)) != len(nums)
+        
+        mapp = collections.OrderedDict()
+        size = t+1
+        for num in nums:
+            key = num//size
+            
+            if key in mapp:
+                return True
+            
+            mapp[key] = num
+            
+            if key - 1 in mapp and num - mapp[key-1] <= t:
+                return True
+            if key + 1 in mapp and mapp[key+1] - num <= t:
+                return True
+            
+            if len(mapp) > k:
+                mapp.popitem(last= False)
+        return False
